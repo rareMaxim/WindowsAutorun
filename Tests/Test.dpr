@@ -12,7 +12,8 @@ uses
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
   Tests in 'Tests.pas',
-  Autorun.Windows in '..\Autorun.Windows.pas';
+  Autorun.Windows.Register in '..\Autorun.Windows.Register.pas',
+  Autorun.Intrf in '..\Autorun.Intrf.pas';
 
 {$IFNDEF TESTINSIGHT}
 var

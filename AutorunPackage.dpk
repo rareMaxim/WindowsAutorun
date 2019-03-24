@@ -31,6 +31,7 @@ requires
   rtl;
 
 contains
-  Autorun.Windows in 'Autorun.Windows.pas';
+  Autorun.Windows.Register in 'Autorun.Windows.Register.pas',
+  Autorun.Intrf in 'Autorun.Intrf.pas';
 
 end.

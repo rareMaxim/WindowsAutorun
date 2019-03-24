@@ -87,7 +87,8 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="Tests.pas"/>
-        <DCCReference Include="..\Autorun.Windows.pas"/>
+        <DCCReference Include="..\Autorun.Windows.Register.pas"/>
+        <DCCReference Include="..\Autorun.Intrf.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

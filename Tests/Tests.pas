@@ -3,7 +3,7 @@ unit Tests;
 interface
 
 uses
-  Autorun.Windows,
+  Autorun.Windows.Register,
   DUnitX.TestFramework;
 
 type
