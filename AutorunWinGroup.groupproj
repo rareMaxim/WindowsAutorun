@@ -3,10 +3,10 @@
         <ProjectGuid>{2DCC75BA-3F98-4897-904A-C3627AC9AE5F}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Package1.dproj">
+        <Projects Include="AutorunPackage.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Project1.dproj">
+        <Projects Include="Tests\Test.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,32 +17,32 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="Package1">
-        <MSBuild Projects="Package1.dproj"/>
+    <Target Name="AutorunPackage">
+        <MSBuild Projects="AutorunPackage.dproj"/>
     </Target>
-    <Target Name="Package1:Clean">
-        <MSBuild Projects="Package1.dproj" Targets="Clean"/>
+    <Target Name="AutorunPackage:Clean">
+        <MSBuild Projects="AutorunPackage.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="Package1:Make">
-        <MSBuild Projects="Package1.dproj" Targets="Make"/>
+    <Target Name="AutorunPackage:Make">
+        <MSBuild Projects="AutorunPackage.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Project1">
-        <MSBuild Projects="Project1.dproj"/>
+    <Target Name="Test">
+        <MSBuild Projects="Tests\Test.dproj"/>
     </Target>
-    <Target Name="Project1:Clean">
-        <MSBuild Projects="Project1.dproj" Targets="Clean"/>
+    <Target Name="Test:Clean">
+        <MSBuild Projects="Tests\Test.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="Project1:Make">
-        <MSBuild Projects="Project1.dproj" Targets="Make"/>
+    <Target Name="Test:Make">
+        <MSBuild Projects="Tests\Test.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="Package1;Project1"/>
+        <CallTarget Targets="AutorunPackage;Test"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Package1:Clean;Project1:Clean"/>
+        <CallTarget Targets="AutorunPackage:Clean;Test:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Package1:Make;Project1:Make"/>
+        <CallTarget Targets="AutorunPackage:Make;Test:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

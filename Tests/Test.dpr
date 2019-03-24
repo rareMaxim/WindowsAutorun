@@ -11,7 +11,8 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
-  Unit4 in 'Unit4.pas';
+  Tests in 'Tests.pas',
+  Autorun.Windows in '..\Autorun.Windows.pas';
 
 {$IFNDEF TESTINSIGHT}
 var
