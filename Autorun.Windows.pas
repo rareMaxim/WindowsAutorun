@@ -1,4 +1,4 @@
-unit Unit2;
+unit Autorun.Windows;
 
 interface
 
@@ -11,15 +11,15 @@ type
   private
     FPath: string;
     FName: string;
-    FIsNew: boolean;
-    FIsDelete: boolean;
+    FIsNew: Boolean;
+    FIsDelete: Boolean;
   public
     constructor Create(const AName, APath: string);
   public
     property Name: string read FName write FName;
     property Path: string read FPath write FPath;
-    property IsNew: boolean read FIsNew;
-    property IsDelete: boolean read FIsDelete;
+    property IsNew: Boolean read FIsNew;
+    property IsDelete: Boolean read FIsDelete;
   end;
 
   IAutorunManager = interface
@@ -45,11 +45,11 @@ type
     function GetItem(Index: Integer): TAutorunItem;
     function GetItemByName(AName: string): TAutorunItem;
     procedure SetItem(Index: Integer; Value: TAutorunItem);
-    procedure ReadData;
-  protected const
-    AUTORUN_PATH = '\Software\Microsoft\Windows\CurrentVersion\Run';
   protected
-
+    const
+      AUTORUN_PATH = '\Software\Microsoft\Windows\CurrentVersion\Run';
+  protected
+    procedure ReadData;
     procedure SaveData;
     procedure FillKeyValues(AReg: TRegistry; AList: TList<TAutorunItem>);
   public
@@ -94,7 +94,6 @@ begin
 end;
 
 function TWinAutorunRegisterBase.Count: Integer;
-
 begin
   Result := FList.Count;
 end;
@@ -119,13 +118,14 @@ begin
   inherited;
 end;
 
-procedure TWinAutorunRegisterBase.FillKeyValues(AReg: TRegistry;
-  AList: TList<TAutorunItem>);
+procedure TWinAutorunRegisterBase.FillKeyValues(AReg: TRegistry; AList: TList<
+  TAutorunItem>);
 var
   LKeys: TStringList;
   I: Integer;
 begin
   LKeys := TStringList.Create();
+  AList.Clear;
   try
     AReg.GetValueNames(LKeys);
     for I := 0 to LKeys.Count - 1 do
@@ -140,13 +140,14 @@ end;
 
 function TWinAutorunRegisterBase.GetItem(Index: Integer): TAutorunItem;
 begin
-  Result := FList[index];
+  Result := FList[Index];
 end;
 
 function TWinAutorunRegisterBase.GetItemByName(AName: string): TAutorunItem;
 var
   MyElem: TAutorunItem;
 begin
+  Result := nil;
   for MyElem in FList do
     if MyElem.Name = AName then
     begin
@@ -208,3 +209,4 @@ begin
 end;
 
 end.
+

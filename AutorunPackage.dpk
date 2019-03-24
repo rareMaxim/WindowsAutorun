@@ -1,4 +1,4 @@
-package Package1;
+package AutorunPackage;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -31,6 +31,6 @@ requires
   rtl;
 
 contains
-  Unit2 in 'Unit2.pas';
+  Autorun.Windows in 'Autorun.Windows.pas';
 
 end.
