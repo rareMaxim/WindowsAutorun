@@ -32,6 +32,7 @@ requires
 
 contains
   Autorun.Windows.Register in 'Autorun.Windows.Register.pas',
-  Autorun.Intrf in 'Autorun.Intrf.pas';
+  Autorun.Intrf in 'Autorun.Intrf.pas',
+  Autorun.Windows.StartupDir in 'Autorun.Windows.StartupDir.pas';
 
 end.

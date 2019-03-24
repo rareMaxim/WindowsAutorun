@@ -12,12 +12,13 @@ type
     FName: string;
     FIsNew: Boolean;
     FIsDelete: Boolean;
+    procedure SetIsNew(const Value: Boolean);
   public
     constructor Create(const AName, APath: string);
   public
     property Name: string read FName write FName;
     property Path: string read FPath write FPath;
-    property IsNew: Boolean read FIsNew write FIsNew;
+    property IsNew: Boolean read FIsNew write SetIsNew;
     property IsDelete: Boolean read FIsDelete write FIsDelete;
   end;
 
@@ -40,10 +41,13 @@ type
   TAutorunBase = class abstract(TInterfacedObject)
   protected
     FList: TObjectList<TAutorunItem>;
-    function GetItem(Index: Integer): TAutorunItem;
-    function GetItemByName(AName: string): TAutorunItem;
-    procedure SetItem(Index: Integer; Value: TAutorunItem);
+    function GetItem(Index: Integer): TAutorunItem; virtual;
+    function GetItemByName(AName: string): TAutorunItem; virtual;
+    procedure SetItem(Index: Integer; Value: TAutorunItem); virtual;
   public
+    procedure Add(const AName, APath: string); virtual;
+    procedure Delete(const AName: string); virtual;
+    function Count: Integer; virtual;
     constructor Create; virtual;
     destructor Destroy; override;
   end;
@@ -62,11 +66,38 @@ begin
   FIsDelete := False;
 end;
 
+procedure TAutorunItem.SetIsNew(const Value: Boolean);
+begin
+  FIsNew := Value;
+  if Value then
+    FIsDelete := True;
+end;
+
 { TAutorunBase }
+
+procedure TAutorunBase.Add(const AName, APath: string);
+begin
+  FList.Add(TAutorunItem.Create(AName, APath));
+  FList.Last.IsNew := True;
+end;
+
+function TAutorunBase.Count: Integer;
+begin
+  Result := FList.Count;
+end;
 
 constructor TAutorunBase.Create;
 begin
   FList := TObjectList<TAutorunItem>.Create;
+end;
+
+procedure TAutorunBase.Delete(const AName: string);
+var
+  LItem: TAutorunItem;
+begin
+  LItem := GetItemByName(AName);
+  if Assigned(LItem) then
+    LItem.IsDelete := True;
 end;
 
 destructor TAutorunBase.Destroy;

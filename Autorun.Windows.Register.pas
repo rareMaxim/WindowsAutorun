@@ -23,9 +23,6 @@ type
     procedure SaveData;
     procedure FillKeyValues(AReg: TRegistry; AList: TList<TAutorunItem>);
   public
-    procedure Add(const AName, APath: string);
-    procedure Delete(const AName: string);
-    function Count: Integer;
     constructor Create; override;
     destructor Destroy; override;
     procedure AfterConstruction; override;
@@ -51,32 +48,16 @@ uses
 
 { TWinAutorunRegisterBase }
 
-procedure TWinAutorunRegisterBase.Add(const AName, APath: string);
-begin
-  FList.Add(TAutorunItem.Create(AName, APath));
-  FList.Last.IsNew := True;
-end;
-
 procedure TWinAutorunRegisterBase.AfterConstruction;
 begin
   inherited;
   ReadData;
 end;
 
-function TWinAutorunRegisterBase.Count: Integer;
-begin
-  Result := FList.Count;
-end;
-
 constructor TWinAutorunRegisterBase.Create;
 begin
   inherited;
   FReg := TRegistry.Create;
-end;
-
-procedure TWinAutorunRegisterBase.Delete(const AName: string);
-begin
-  GetItemByName(AName).IsDelete := True;
 end;
 
 destructor TWinAutorunRegisterBase.Destroy;
@@ -113,16 +94,14 @@ end;
 
 procedure TWinAutorunRegisterBase.SaveData;
 var
-  MyElem: TAutorunItem;
   I: Integer;
 begin
   for I := 0 to FList.Count - 1 do
   begin
-    MyElem := FList[I];
-    if MyElem.IsNew then
-      FReg.WriteString(MyElem.Name, MyElem.Path);
-    if MyElem.IsDelete then
-      FReg.DeleteValue(MyElem.Name);
+    if FList[I].IsDelete then
+      FReg.DeleteValue(FList[I].Name);
+    if FList[I].IsNew then
+      FReg.WriteString(FList[I].Name, FList[I].Path);
   end;
 end;
 

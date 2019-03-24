@@ -11,9 +11,12 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
-  Tests in 'Tests.pas',
+  TestsWin.Registry in 'TestsWin.Registry.pas',
   Autorun.Windows.Register in '..\Autorun.Windows.Register.pas',
-  Autorun.Intrf in '..\Autorun.Intrf.pas';
+  Autorun.Intrf in '..\Autorun.Intrf.pas',
+  Autorun.Windows.StartupDir in '..\Autorun.Windows.StartupDir.pas',
+  TestsWin.Base in 'TestsWin.Base.pas',
+  TestWin.StartupDir in 'TestWin.StartupDir.pas';
 
 {$IFNDEF TESTINSIGHT}
 var
